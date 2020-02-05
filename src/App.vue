@@ -21,20 +21,20 @@
     <v-app-bar
       app
       dense
-      dark
-      class="purple darken-1"
+      dark class="primary"
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" class="hidden-md-and-up"></v-app-bar-nav-icon>
       <v-toolbar-title>DevMeetup</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-sm-and-down">
-        <v-btn text small>
-          <v-icon left>mdi-account-multiple</v-icon>
-          View Meetups
+        <v-btn text small v-for="item in items" :key="item.title">
+          <v-icon left>{{ item.icon }}</v-icon>
+          {{ item.title }}
         </v-btn>
       </v-toolbar-items>
     </v-app-bar>
     <v-content>
+      <router-view></router-view>
     </v-content>
   </v-app>
 </template>
@@ -44,7 +44,11 @@ export default {
   data: () => ({
     drawer: null,
     items: [
-      { title: 'View Meetups', icon: 'mdi-account-multiple' }
+      { title: 'View Meetups', icon: 'mdi-account-multiple' },
+      { title: 'Organize Meetup', icon: 'mdi-map-marker' },
+      { title: 'Profile', icon: 'mdi-account' },
+      { title: 'Sign Up', icon: 'mdi-face' },
+      { title: 'Sign In', icon: 'mdi-lock-open' }
     ]
   })
 }
