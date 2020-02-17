@@ -1,32 +1,41 @@
 <template>
   <v-container>
-    <v-row>
+    <v-row
+      v-for="meetup in meetups"
+      :key="meetup.id"
+    >
       <v-col
         md="12"
       >
-        <v-card>
-          <v-row class="pl-3">
+        <v-card class="px-3">
+          <v-row>
             <v-col
               cols="auto"
               md="3"
             >
               <v-img
-                src="https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg"
+                :src="meetup.src"
                 height="130px"
               ></v-img>
             </v-col>
             <v-col
               cols="auto"
-              class="pt-0"
+              class="pa-0"
             >
-              <v-card-title class="mt-0">
+              <v-card-title>
                 <div>
-                  <h5>Squirrel eat nut</h5>
+                  <h5>{{ meetup.title }}</h5>
                   <div>
-                    <h6>28 February 2020</h6>
+                    <h6>{{ meetup.date }}</h6>
                   </div>
                 </div>
               </v-card-title>
+              <v-card-action>
+                <v-btn text class="ma-2" :to="'/meetups/' + meetup.id">
+                  <v-icon>mdi-arrow-right</v-icon>
+                  View Meetup
+                </v-btn>
+              </v-card-action>
             </v-col>
           </v-row>
         </v-card>
@@ -34,3 +43,13 @@
     </v-row>
   </v-container>
 </template>
+
+<script>
+export default {
+  computed: {
+    meetups () {
+      return this.$store.getters.loadedMeetups
+    }
+  }
+}
+</script>

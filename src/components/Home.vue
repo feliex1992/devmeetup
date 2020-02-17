@@ -5,13 +5,13 @@
         class="mt-4"
       >
         <v-card
-          class="mx-3">
-          <v-btn large router to="/meetups" class="info">Explore Meetups</v-btn>
+          class="mb-2 mx-4">
+          <v-btn large router to="/meetups" class="info" width="170px">Explore Meetups</v-btn>
         </v-card>
         <v-card
-          class="mx-3"
+          class="mb-2 mx-4"
         >
-          <v-btn large router to="/meetup/new" class="info">Organize Meetup</v-btn>
+          <v-btn large router to="/meetup/new" class="info" width="170px">Organize Meetup</v-btn>
         </v-card>
       </v-row>
       <v-row
@@ -26,11 +26,13 @@
             <v-carousel
               cycle
               show-arrows-on-hover
+              style="cursor: pointer;"
             >
               <v-carousel-item
-                v-for="item in items"
+                v-for="item in meetups"
                 :key="item.id"
                 :src="item.src"
+                @click="onLoadMeetup(item.id)"
               >
                 <v-row justify="center">
                   <div class="title">{{ item.title }}</div>
@@ -45,14 +47,14 @@
 
 <script>
 export default {
-  data () {
-    return {
-      items: [
-        { id: '00000001', title: 'Squirrel eat nut', src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg' },
-        { id: '00000002', title: 'Sky view the beatifull', src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg' },
-        { id: '00000003', title: 'Bird clean his mout', src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg' },
-        { id: '00000004', title: 'Planets at the universe', src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg' }
-      ]
+  computed: {
+    meetups () {
+      return this.$store.getters.featuredMeetups
+    }
+  },
+  methods: {
+    onLoadMeetup (id) {
+      this.$router.push('/meetups/' + id)
     }
   }
 }

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/components/Home.vue'
 import Meetups from '@/components/Meetup/Meetups.vue'
+import Meetup from '@/components/Meetup/Meetup.vue'
 import CreateMeetup from '@/components/Meetup/CreateMeetup.vue'
 import Profile from '@/components/User/Profile.vue'
 import Signup from '@/components/User/Signup.vue'
@@ -19,6 +20,12 @@ const routes = [
     path: '/meetups',
     name: 'Meetups',
     component: Meetups
+  },
+  {
+    path: '/meetups/:id',
+    name: 'Meetup',
+    props: true,
+    component: Meetup
   },
   {
     path: '/meetup/new',
