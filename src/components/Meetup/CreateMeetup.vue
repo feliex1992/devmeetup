@@ -17,32 +17,61 @@
               label="Title*"
               outlined
               dense
+              v-model="title"
             ></v-text-field>
             <v-text-field
               label="Location*"
               outlined
               dense
+              v-model="location"
             ></v-text-field>
             <v-text-field
               label="Image URL*"
               outlined
               dense
+              v-model="imageUrl"
             ></v-text-field>
-            <v-text-field
-              label="Description*"
-              outlined
-              dense
-              multi-line
-            ></v-text-field>
+            <img class="mb-5" :src="imageUrl" height="200">
             <v-textarea
               label="Description*"
               outlined
               dense
               auto-grow
+              v-model="description"
             ></v-textarea>
+          </v-col>
+        </v-row>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-row justify="center" class="ma-0">
+          <v-col sm="6" md="6" class="pa-0">
+            <v-btn class="primary" :disabled="!formIsValid">Create Meetup</v-btn>
           </v-col>
         </v-row>
       </v-col>
     </v-row>
   </v-container>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      title: '',
+      location: '',
+      imageUrl: '',
+      description: ''
+    }
+  },
+  computed: {
+    formIsValid () {
+      return this.title !== '' &&
+        this.location !== '' &&
+        this.imageUrl !== '' &&
+        this.description !== ''
+    }
+  }
+}
+</script>
