@@ -43,15 +43,21 @@
         </v-row>
       </v-col>
     </v-row>
-    <v-row>
-      <v-col>
-        <v-row justify="center" class="ma-0">
-          <v-col sm="6" md="6" class="pa-0">
-            <v-btn class="primary" :disabled="!formIsValid">Create Meetup</v-btn>
-          </v-col>
-        </v-row>
-      </v-col>
-    </v-row>
+    <form @submit.prevent="onCreateMeetup">
+      <v-row>
+        <v-col>
+          <v-row justify="center" class="ma-0">
+            <v-col sm="6" md="6" class="pa-0">
+              <v-btn
+                class="primary"
+                :disabled="!formIsValid"
+                type="submit"
+              >Create Meetup</v-btn>
+            </v-col>
+          </v-row>
+        </v-col>
+      </v-row>
+    </form>
   </v-container>
 </template>
 
@@ -71,6 +77,22 @@ export default {
         this.location !== '' &&
         this.imageUrl !== '' &&
         this.description !== ''
+    }
+  },
+  methods: {
+    onCreateMeetup () {
+      if (!this.formIsValid) {
+        return
+      }
+      const meetupData = {
+        title: this.title,
+        location: this.location,
+        imageUrl: this.imageUrl,
+        description: this.description,
+        date: new Date()
+      }
+      this.$store.dispatch('createMeetup', meetupData)
+      this.$router.push('/meetups')
     }
   }
 }
